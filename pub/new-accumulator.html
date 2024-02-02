@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+  <meta charset=utf-8>
+  <title>RETAILER CONFIGURATOR 3000 ENTERPRISE EDITION</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Configure New Accumulator Retailer</h1>
+
+    <form hx-post="/api/v1/plans" hx-target="#save-result">
+      <fieldset>
+        <legend>Plan Identifiers</legend>
+        <div class="row">
+          <div class="column">
+            <!-- name / bpl / slug -->
+            <div class="row">
+              <div class="column column-50">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" hx-get="/api/v1/slugify" hx-target="#slug" hx-trigger="keyup"
+                  hx-include="#is-bpl" required placeholder="Teatailor Squad" />
+              </div>
+              <div class="column column-10">
+                <label for="is-bpl">BPL</label>
+                <input type="checkbox" name="is-bpl" id="is-bpl" hx-get="/api/v1/slugify" hx-target="#slug"
+                  hx-include="#name" />
+              </div>
+              <div class="column">
+                <label for="slug">Slug</label>
+                <span id="slug"></span>
+              </div>
+            </div>
+            <!-- url -->
+            <label for="url">URL</label>
+            <input type="text" name="url" id="url" required placeholder="https://teatailor.co.uk" />
+            <!-- company -->
+            <label for="company">Company</label>
+            <input type="text" name="company" id="company" required placeholder="Flying Saucer" />
+            <!-- category -->
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="uncategorised">Uncategorised</option>
+              <option value="travel">Travel</option>
+              <option value="finance">Finance</option>
+              <option value="household">Household</option>
+              <option value="social">Social</option>
+              <option value="food-and-drink">Food & Drink</option>
+              <option value="retail">Retail</option>
+            </select>
+          </div>
+
+          <div class="column">
+            <label for="summary">Summary</label>
+            <textarea id="summary"></textarea>
+            <label for="description">Description</label>
+            <textarea id="description"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Plan Config</legend>
+
+        <div class="row">
+          <div class="column">
+
+            <input type="checkbox" id="coming-soon">
+            <label class="label-inline" for="coming-soon">Coming Soon?</label>
+
+            <div>
+              <label>Supported Journeys</label>
+
+              <div>
+                <input type="checkbox" id="enrol">
+                <label class="label-inline" for="enrol">Enrol</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="add">
+                <label class="label-inline" for="add">Add</label>
+              </div>
+
+              <div>
+                <input type="checkbox" id="registration">
+                <label class="label-inline" for="registration">Registration</label>
+              </div>
+            </div>
+
+            <hr>
+
+            <div>
+              <input type="checkbox" id="transaction-history">
+              <label class="label-inline" for="transaction-history">Transaction History?</label>
+            </div>
+            <div>
+              <input type="checkbox" id="auth-required">
+              <label class="label-inline" for="auth-required">Authorisation Required?</label>
+            </div>
+            <div>
+              <input type="checkbox" id="digital-only">
+              <label class="label-inline" for="digital-only">Digital Only?</label>
+            </div>
+
+          </div>
+
+          <div class="column">
+            <label for="vop-merchant-group">VOP Merchant Group</label>
+            <select id="vop-merchant-group">
+              <option value="default">Default</option>
+              <option value="squaremeal">Squaremeal</option>
+            </select>
+
+            <label>UI Plan Descriptor</label>
+            <div>
+              <input type="radio" name="plan-descriptor" id="card" value="card" checked />
+              <label class="label-inline" for="card">Card</label>
+            </div>
+            <div>
+              <input type="radio" name="plan-descriptor" id="account" value="account" />
+              <label class="label-inline" for="account">Account</label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Plan Look and Feel</legend>
+
+        <div class="row">
+          <div class="column">
+            <label for="plan-colour">Plan Colour</label>
+            <input type="color" value="#ED30F1"></input>
+            <label for="text-colour">Text Colour</label>
+            <input type="color" value="#2E2E40"></input>
+          </div>
+
+          <div class="column">
+            <label>Icon</label>
+            <a class="button">Browse...</a>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="column">
+            <label>Balance Details</label>
+            <input type="text" id="currency" placeholder="Currency" />
+            <input type="text" id="prefix" placeholder="Prefix" />
+            <input type="text" id="suffix" placeholder="Suffix" />
+          </div>
+          <div class="column">
+            <label>Card Image</label>
+            <a class="button">Browse...</a>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Join</legend>
+        <div class="row">
+          <div class="column">
+            <label for="join-url">URL</label>
+            <input type="text" name="join-url" id="join-url" hx-get="/api/v1/reflected-url" hx-trigger="keyup"
+              hx-include="#join-url-mocked" hx-target="#example-mock-join-url" required />
+          </div>
+          <div class="column">
+            <input type="checkbox" name="join-url-mocked" id="join-url-mocked" hx-get="/api/v1/reflected-url"
+              hx-trigger="click" hx-include="#join-url" hx-target="#example-mock-join-url" />
+            <label class="label-inline" for="join-url-mocked">Use API Reflector</label>
+            <div>
+              <span id="example-mock-join-url"></span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Transaction Matching</legend>
+        <div class="row">
+          <div class="column">
+            <label for="name">Export URL</label>
+            <input type="text" name="export-url" id="export-url" hx-get="/api/v1/reflected-url" hx-trigger="keyup"
+              hx-include="#export-url-mocked" hx-target="#example-mock-export-url" required />
+          </div>
+          <div class="column">
+            <input type="checkbox" name="export-url-mocked" id="export-url-mocked" hx-get="/api/v1/reflected-url"
+              hx-trigger="click" hx-include="#export-url" hx-target="#example-mock-export-url" />
+            <label class="label-inline" for="export-url-mocked">Use API Reflector</label>
+            <div>
+              <span id="example-mock-export-url"></span>
+            </div>
+          </div>
+      </fieldset>
+      <input type="submit" value="Save!" />
+    </form>
+
+    <span id="save-result"></span>
+  </div>
+
+  <!-- leave this at the bottom pls -->
+  <script src="https://unpkg.com/htmx.org@1.9.10"
+    integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

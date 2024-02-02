@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang=en>
+
+<head>
+  <meta charset=utf-8>
+  <title>RETAILER CONFIGURATOR 3000 ENTERPRISE EDITION</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="column column-50 column-offset-25">
+        <form class="top-margin">
+          <fieldset>
+            <legend>Create New Retailer</legend>
+            <label>New Retailer Type</label>
+            <div>
+              <input type="radio" name="type" id="accumulator" value="accumulator" checked />
+              <label class="label-inline" for="accumulator">Accumulator</label>
+            </div>
+            <div>
+              <input type="radio" name="type" id="points" value="points" />
+              <label class="label-inline" for="points">Points</label>
+            </div>
+            <div>
+              <input type="radio" name="type" id="stamps" value="stamps" />
+              <label class="label-inline" for="stamps">Stamps</label>
+            </div>
+
+            <hr>
+
+            <div>
+              <input type="checkbox" name="vouchers" id="vouchers" />
+              <label class="label-inline" for="vouchers">Vouchers</label>
+            </div>
+
+            <a class="button" href="/pub/new-accumulator.html">Configure New Retailer</a>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- leave this at the bottom pls -->
+  <script src="https://unpkg.com/htmx.org@1.9.10"
+    integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
